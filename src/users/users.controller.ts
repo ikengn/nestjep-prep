@@ -12,11 +12,6 @@ import { AuthGuard } from 'src/auth/guards/auth.guard';
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Get('me')
-    async getProfile(@Request() req) {
-        return this.usersService.getById(req.user.sub);
-    }
-
     @Patch('me')
     async updateProfile(@Request() req, @Body() updateUserDto: UpdateUserDto) {
         return this.usersService.update(req.user.sub, updateUserDto);
@@ -27,13 +22,4 @@ export class UsersController {
         return this.usersService.delete(req.user.sub);
     }
 
-    @Get(':id')
-    async getUserById(@Request() req) {
-        return this.usersService.getById(req.user.sub);
-    }
-
-    @Delete(':id')
-    async deleteUserById(@Request() req) {
-        return this.usersService.delete(req.user.sub);
-    }
 }

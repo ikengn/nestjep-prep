@@ -12,7 +12,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
 
-    // The exception body carries the real reason (e.g. "Validation failed").
     const details = exception.getResponse();
     this.logger.warn(
       `${request.method} ${request.url} ${status} - ${JSON.stringify(details)}`,
