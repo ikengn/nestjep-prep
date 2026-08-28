@@ -9,7 +9,11 @@ import {
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 
-export type TaskStatus = 'pending' | 'in_progress' | 'completed';
+export enum TaskStatus {
+  PENDING = 'pending',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+}
 
 @Entity('tasks')
 export class Task {
@@ -25,8 +29,8 @@ export class Task {
   @Column({
     name: 'completion_status',
     type: 'enum',
-    enum: ['pending', 'in_progress', 'completed'],
-    default: 'pending',
+    enum: TaskStatus,
+    default: TaskStatus.PENDING,
   })
   completionStatus: TaskStatus;
 

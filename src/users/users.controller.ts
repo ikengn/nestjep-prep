@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Delete, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Patch, Delete, Body, UseGuards, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';

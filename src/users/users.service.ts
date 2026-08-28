@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class UsersService {
@@ -34,7 +36,15 @@ export class UsersService {
         if (!user) {
             throw new Error(`User with ID ${id} not found`);
         }
-        Object.assign(user, updateUserDto);
+        if (updateUserDto.username) {
+            user.username = updateUserDto.username;
+        }
+        if (updateUserDto.email) {
+            user.email = updateUserDto.email;
+        }
+        if (updateUserDto.password) {
+            user.password = await bcrypt.hash(updateUserDto.password, 10);
+        }
         return this.usersRepository.save(user);
     }
 
